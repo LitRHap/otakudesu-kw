@@ -8,7 +8,7 @@ let loadingSpinner2 = document.querySelector("#loading-spinner2");
 
 var getAnime = {
  home: function() {
-  fetch("https://otakudesu-unofficial-api.rzkfyn.tech/api/v1/home").then((r)=>r.json()).then((j) => {
+  fetch("https://otakudesu-unofficial-api.rzkfyn.xyz/api/v1/home").then((r)=>r.json()).then((j) => {
    loadingSpinner1.remove();
    loadingSpinner2.remove();
    //ongoingSection
@@ -56,7 +56,7 @@ var getAnime = {
  },
  search: function(q) {
   let resultSection = document.querySelector("#results-section");
-  fetch("https://otakudesu-unofficial-api.rzkfyn.tech/api/v1/search/" + q).then((r)=>r.json()).then((j) => {
+  fetch("https://otakudesu-unofficial-api.rzkfyn.xyz/api/v1/search/" + q).then((r)=>r.json()).then((j) => {
    loadingSpinner1.remove();
    if (j.data.length > 0) {
     j.data.forEach((i) => {
@@ -84,7 +84,7 @@ var getAnime = {
   });
  },
  ongoing: function(p) {
-  fetch(`https://otakudesu-unofficial-api.rzkfyn.tech/api/v1/ongoing-anime/${p ? p: ""}`).then((r)=>r.json()).then((j) => {
+  fetch(`https://otakudesu-unofficial-api.rzkfyn.xyz/api/v1/ongoing-anime/${p ? p: ""}`).then((r)=>r.json()).then((j) => {
    loadingSpinner1.remove();
    let loadMore = document.querySelector("#loadMore");
    if (j.pagination.has_next_page) {
@@ -118,7 +118,7 @@ var getAnime = {
   });
  },
  completed: function(p) {
-  fetch(`https://otakudesu-unofficial-api.rzkfyn.tech/api/v1/complete-anime/${p ? p: ""}`).then((r)=>r.json()).then((j) => {
+  fetch(`https://otakudesu-unofficial-api.rzkfyn.xyz/api/v1/complete-anime/${p ? p: ""}`).then((r)=>r.json()).then((j) => {
    loadingSpinner1.remove();
    let loadMore = document.querySelector("#loadMore");
    if (j.pagination.has_next_page) {
@@ -161,15 +161,15 @@ var getAnime = {
  },
  episode: async function(eps_slug,
   anime_slug) {
-  let res = await fetch("https://otakudesu-unofficial-api.rzkfyn.tech/api/v1/episode/" + eps_slug);
+  let res = await fetch("https://otakudesu-unofficial-api.rzkfyn.xyz/api/v1/episode/" + eps_slug);
   let eps = await res.json();
   // console.log(eps);
   if (eps.status != "Ok") {
    nothingHere()
   } else {
-   document.title = `${eps.data.episode} - OtokoDesu`;
+   document.title = `${eps.data.episode} - OtaquDesu`;
    document.getElementsByTagName("meta")["description"].content = `Unduh, Nonton, & Streaming Anime ${eps.data.episode} resolusi 360p, 480p, 720p, HD, HR format Mp4 dan Mkv lengkap beserta Batch. (Situs ini dibuat dengan OtakuDesu API/Scraper)`;
-   document.querySelector("meta[property='og:title']").content = `${eps.data.episode} - OtokoDesu`;
+   document.querySelector("meta[property='og:title']").content = `${eps.data.episode} - OtaquDesu`;
    document.querySelector("meta[property='og:description']").content = `Unduh, Nonton, & Streaming Anime ${eps.data.episode} resolusi 360p, 480p, 720p, HD, HR format Mp4 dan Mkv lengkap beserta Batch. (Situs ini dibuat dengan OtakuDesu API/Scraper)`;
 
    document.querySelector("iframe").src = eps.data.stream_url;
@@ -186,7 +186,7 @@ var getAnime = {
    document.querySelector("#episode").innerText = eps.data.episode;
    document.querySelector("#download-menu").innerHTML = `${eps.data.download_urls.mp4.map((d) => '<li class="menu-title"><span>'+d.resolution+'</span></li><li>'+ (d.urls.map((u) => "<a target='_blank' href='"+u.url+"'>"+u.provider+"</a>").join("")) +'</li>').join("")}`
 
-   let Res = await fetch("https://otakudesu-unofficial-api.rzkfyn.tech/api/v1/anime/" + anime_slug);
+   let Res = await fetch("https://otakudesu-unofficial-api.rzkfyn.xyz/api/v1/anime/" + anime_slug);
    let anime = await Res.json();
    document.querySelector("meta[property='og:image']").content = anime.data.poster;   
    if (anime.status == "Ok") {
@@ -213,12 +213,12 @@ var getAnime = {
   }
  },
  info: function(slug) {
-  fetch("https://otakudesu-unofficial-api.rzkfyn.tech/api/v1/anime/" + slug).then((r) => r.json()).then((j) => {
+  fetch("https://otakudesu-unofficial-api.rzkfyn.xyz/api/v1/anime/" + slug).then((r) => r.json()).then((j) => {
    // console.log(j);
    if (j.status == "Ok") {
-    document.title = `${j.data.title} - OtokoDesu`;
+    document.title = `${j.data.title} - OtaquDesu`;
     document.getElementsByTagName("meta")["description"].content = `Unduh, Nonton, & Streaming Anime ${j.data.title} Sub Indo resolusi 360p, 480p, 720p, HD, HR format Mp4 dan Mkv lengkap beserta Batch.`;
-    document.querySelector("meta[property='og:title']").content = `${j.data.title} - OtokoDesu`;
+    document.querySelector("meta[property='og:title']").content = `${j.data.title} - OtaquDesu`;
     document.querySelector("meta[property='og:description']").content = `Unduh, Nonton, & Streaming Anime ${j.data.title} resolusi 360p, 480p, 720p, HD, HR format Mp4 dan Mkv lengkap beserta Batch. (Situs ini dibuat dengan OtakuDesu API/Scraper)`;
     document.querySelector("meta[property='og:image']").content = j.data.poster;   
     loadingSpinner1.parentNode.remove();

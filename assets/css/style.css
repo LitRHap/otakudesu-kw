@@ -69,13 +69,3 @@
   background-position: left top;
  }
 }
-
-
- ::-webkit-scrollbar {
- display: none;
-}
-
-body {
-    /* example of a problematic CSS that might hide the content */
-    display: none;  /* Ensure there's no CSS like this by mistake */
-}

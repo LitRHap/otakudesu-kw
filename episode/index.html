@@ -161,18 +161,24 @@
 
 
 
- <script src="/assets/js/script.js"></script>
- <script>
-  nothingHere = () => {
-   document.title = "Tidak ada apa-apa di sini.";
-   document.querySelector("main").innerHTML = "<div class='h-96 flex items-center justify-center'>Tidak ada apa-apa di sini.";
+<script src="/assets/js/script.js"></script>
+<script>
+  const nothingHere = () => {
+    document.title = "Tidak ada apa-apa di sini.";
+    document.querySelector("main").innerHTML = "<div class='h-96 flex items-center justify-center'>Tidak ada apa-apa di sini.</div>";
   }
 
-  if (new URL(window.location.href).searchParams.has('eps_slug', 'anime_slug')) {
-   document.addEventListener("DOMContentLoaded", getAnime.episode(new URL(window.location.href).searchParams.get('eps_slug'), new URL(window.location.href).searchParams.get('anime_slug')))
-  } else {
-   nothingHere();
-  }
- </script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URL(window.location.href).searchParams;
+    const epsSlug = urlParams.get('eps_slug');
+    const animeSlug = urlParams.get('anime_slug');
+
+    if (epsSlug && animeSlug) {
+      getAnime.episode(epsSlug, animeSlug);
+    } else {
+      nothingHere();
+    }
+  });
+</script>
 </body>
 </html>
